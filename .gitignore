@@ -1,0 +1,8 @@
+*.a
+*.o
+*~
+
+applications/make_db
+applications/run_BayeX
+applications/run_HubeX
+applications/run_ThemX
