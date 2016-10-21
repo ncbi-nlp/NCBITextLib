@@ -910,7 +910,7 @@ WOrdr<Y,Z>::WOrdr(void) : Ordr<Y,Z>() {
 
 template<class Y,class Z>
 WOrdr<Y,Z>::WOrdr(Ordr<Y,Z> *pOrd,Z *weg) {
-   if(!pOrd){cout << "Error, pOrd is NULL!" << endl;exit(0);}
+   if(!pOrd){cout << "Error, pOrd is NULL!" << endl;exit(1);}
    this->idx=pOrd->idx;
    this->ix=pOrd->ix;
    pOrd->idx=NULL;

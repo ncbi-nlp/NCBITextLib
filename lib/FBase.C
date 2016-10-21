@@ -110,7 +110,7 @@ void FBase::get_pathx(char *nam,const char *ch) {
          fin.open(cnam,ios::in);
          if(!fin.is_open()) {
             cout << "Path file for type " << type << " does not exist!" << endl;
-            exit(0);
+            exit(1);
          }
       }
       fin.getline(nam,256);
@@ -142,7 +142,7 @@ void FBase::get_pathx(char *nam,const char *ch) {
                fin.open(cnam,ios::in);
                if(!fin.is_open()) {
                   cout << "Path file for type " << type << " does not exist!" << endl;
-                  exit(0);
+                  exit(1);
                }
             }
          }
@@ -168,7 +168,7 @@ ifstream *FBase::get_Istr(const char *a,ios::openmode mode) {
    if(pfin->is_open())return(pfin);
    else {
       cout << "Error: " << cnam << " failed to open!" << endl;
-      exit(0);
+      exit(1);
    }
 }
 
@@ -179,7 +179,7 @@ ofstream *FBase::get_Ostr(const char *a,ios::openmode mode) {
    if(pfout->is_open())return(pfout);
    else {
       cout << "Error: " << cnam << " failed to open!" << endl;
-      exit(0);
+      exit(1);
    }
 }
 
@@ -190,7 +190,7 @@ fstream *FBase::get_Fstr(const char *a,ios::openmode mode) {
    if(pfstr->is_open())return(pfstr);
    else {
       cout << "Error: " << cnam << " failed to open!" << endl;
-      exit(0);
+      exit(1);
    }
 }
 
@@ -198,7 +198,7 @@ void FBase::dst_Istr(ifstream *pfin) {
    if(!pfin)return;
    if(!pfin->is_open()) {
       cout << "File not open!" << endl;
-      exit(0);
+      exit(1);
    }
    delete pfin;
 }
@@ -207,7 +207,7 @@ void FBase::dst_Ostr(ofstream *pfout) {
    if(!pfout)return;
    if(!pfout->is_open()) {
       cout << "File not open!" << endl;
-      exit(0);
+      exit(1);
    }
    delete pfout;
 }
@@ -216,7 +216,7 @@ void FBase::dst_Fstr(fstream *pfstr) {
    if(!pfstr)return;
    if(!pfstr->is_open()) {
       cout << "File not open!" << endl;
-      exit(0);
+      exit(1);
    }
    delete pfstr;
 }
@@ -228,9 +228,9 @@ long FBase::get_Fsiz(const char *a) {
    char cnam[max_str];
    get_pathx(cnam,a);
    fld=::open(cnam,O_RDONLY);
-   if(fld<=0){cout << cnam << " failed to open" << endl;exit(0);}
+   if(fld<=0){cout << cnam << " failed to open" << endl;exit(1);}
    if(fstat(fld,&datf)){cout << cnam << " failed on size \
-      determination" << endl;exit(0);}
+      determination" << endl;exit(1);}
    ::close(fld);
    return(datf.st_size);
 }
@@ -252,15 +252,15 @@ char *FBase::get_Read(const char *a) {
    char cnam[max_str];
    get_pathx(cnam,a);
    fld=::open(cnam,O_RDONLY);
-   if(fld<=0){cout << cnam << " failed to open" << endl;exit(0);}
+   if(fld<=0){cout << cnam << " failed to open" << endl;exit(1);}
    if(fstat(fld,&datf)){cout << cnam << " failed on size \
-      determination" << endl;exit(0);}
+      determination" << endl;exit(1);}
    ::close(fld);
    char *ptr=new char[datf.st_size];
    ifstream fin(cnam,ios::in);
    if(!fin.is_open()) {
       cout << "Error: " << cnam << " failed to open!" << endl;
-      exit(0);
+      exit(1);
    }
    fin.read(ptr,datf.st_size);
    return(ptr);
@@ -272,10 +272,10 @@ char *FBase::get_Mmap(const char *a) {
    char cnam[max_str];
    get_pathx(cnam,a);
    fld=::open(cnam,O_RDONLY);
-   if(fld<=0){cout << cnam << " failed to open" << endl;exit(0);}
-   if(fstat(fld,&datf)){cout << cnam << " failed on size determination" << endl;exit(0);}
+   if(fld<=0){cout << cnam << " failed to open" << endl;exit(1);}
+   if(fstat(fld,&datf)){cout << cnam << " failed on size determination" << endl;exit(1);}
    char *ptr=(char*)mmap(0,datf.st_size,PROT_READ,MAP_PRIVATE|MAP_NORESERVE,fld,0);
-   if(ptr==MAP_FAILED){cout << cnam << " failed to map" << endl;exit(0);}
+   if(ptr==MAP_FAILED){cout << cnam << " failed to map" << endl;exit(1);}
    ::close(fld);
    return(ptr);
 }
@@ -286,10 +286,10 @@ char *FBase::get_Wmap(const char *a) {
    char cnam[max_str];
    get_pathx(cnam,a);
    fld=::open(cnam,O_RDWR);
-   if(fld<=0){cout << cnam << " failed to open" << endl;exit(0);}
-   if(fstat(fld,&datf)){cout << cnam << " failed on size determination" << endl;exit(0);}
+   if(fld<=0){cout << cnam << " failed to open" << endl;exit(1);}
+   if(fstat(fld,&datf)){cout << cnam << " failed on size determination" << endl;exit(1);}
    char *ptr=(char*)mmap(0,datf.st_size,PROT_READ|PROT_WRITE,MAP_SHARED,fld,0);
-   if(ptr==MAP_FAILED){cout << cnam << " failed to map" << endl;exit(0);}
+   if(ptr==MAP_FAILED){cout << cnam << " failed to map" << endl;exit(1);}
    ::close(fld);
    return(ptr);
 }  
@@ -299,8 +299,8 @@ void FBase::mak_Msync(const char *a,char *ptr) {
    char cnam[max_str];
    if(ptr==NULL){cout << "NULL pointer" << endl;return;}
    get_pathx(cnam,a);
-   if(stat(cnam,&datf)){cout << cnam << " failed on size determination" << endl;exit(0);}
-   if(msync(ptr,datf.st_size,MS_SYNC)){cout << cnam << " failed to sync" << endl;exit(0);}
+   if(stat(cnam,&datf)){cout << cnam << " failed on size determination" << endl;exit(1);}
+   if(msync(ptr,datf.st_size,MS_SYNC)){cout << cnam << " failed to sync" << endl;exit(1);}
 }
 
 void FBase::dst_Mmap(const char *a,char *&ptr) {
@@ -308,8 +308,8 @@ void FBase::dst_Mmap(const char *a,char *&ptr) {
    char cnam[max_str];
    if(ptr==NULL){cout << "NULL pointer" << endl;return;}
    get_pathx(cnam,a);
-   if(stat(cnam,&datf)){cout << cnam << " failed on size determination" << endl;exit(0);}
-   if(munmap(ptr,datf.st_size)){cout << cnam << " failed to unmap" << endl;exit(0);}
+   if(stat(cnam,&datf)){cout << cnam << " failed on size determination" << endl;exit(1);}
+   if(munmap(ptr,datf.st_size)){cout << cnam << " failed to unmap" << endl;exit(1);}
    ptr=NULL;
 }
 

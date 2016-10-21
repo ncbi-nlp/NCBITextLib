@@ -360,7 +360,7 @@ Z ThemX<Y,Z>::ScoreLim(WOrdr<Y,Z> *wpord) {
    Z xx,sum=0;
    Indx<Y> *pnd,*qnd=(Indx<Y> *)wpord;
    Z *wtt=wpord->weight;
-   if(!qnd->ix){cout << "Error, ix=0" << endl;exit(0);}
+   if(!qnd->ix){cout << "Error, ix=0" << endl;exit(1);}
    for(i=0;i<qnd->ix;i++) {
       sum+=wtt[i];
    }
@@ -385,7 +385,7 @@ WOrdr<Y,Z> *ThemX<Y,Z>::Initiator(Indx<Y> *pInd) {
       this->zerot();
       this->countTX(pBnd);
       Indx<Y> *znd=pBnd->cbool_And(pInd);
-      if(!znd){cout << "Empty intersection!" << endl;exit(0);}
+      if(!znd){cout << "Empty intersection!" << endl;exit(1);}
       this->zeros();
       this->countSX(znd);
       delete znd;

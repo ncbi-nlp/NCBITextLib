@@ -24,7 +24,7 @@ void Hash::create_htable(strMap &Mp,int excess) {
    tnum=1;
    u=0;
    while(ct=ct/2){tnum*=2;u++;}
-   if(u>30){cout << "Error in size, " << u << endl;exit(0);}
+   if(u>30){cout << "Error in size, " << u << endl;exit(1);}
    i=0;
    while((u<32)&&(i<excess)){tnum*=2;u++;i++;}
    tnum--;
@@ -89,7 +89,7 @@ void Hash::create_htable(strMap &Mp,int excess) {
       harr[i]=k;
       k+=j;
    }
-   if(k!=nwrds){cout << "Error in summing!" << endl;exit(0);}
+   if(k!=nwrds){cout << "Error in summing!" << endl;exit(1);}
 
    // Write out harr
    bin_Writ("ha",(tnum+2)*sizeof(long),(char*)harr);
@@ -311,7 +311,7 @@ void Chash::create_ctable(strMap &Mp,int excess) {
          pct[n-1]=p->second;
       }        
       else {
-         cout << "Error in Map!" << endl;exit(0);
+         cout << "Error in Map!" << endl;exit(1);
       }
       p++;
       mark(pflag,++i,10000,"count terms");
@@ -333,7 +333,7 @@ void Chash::create_ctable_STerm(strMap &Mp,int excess) {
          pct[n-1]=i;
       }        
       else {
-         cout << "Error in Map!" << endl;exit(0);
+         cout << "Error in Map!" << endl;exit(1);
       }
       p++;
       mark(pflag,++i,10000,"count terms");
