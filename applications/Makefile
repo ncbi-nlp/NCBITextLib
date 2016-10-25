@@ -13,4 +13,6 @@ $(N): $(N).o ../lib/libops.a
 %.o: %.C
 	g++ -std=c++11 -c $(OS) -I$(INCPATH) $< -o $@
 
+all:  make_db run_ThemX run_HubeX run_BayeX
+
 clean: rm -f $(TRASHFILES)

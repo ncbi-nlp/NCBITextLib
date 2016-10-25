@@ -3,15 +3,7 @@
 
 #include <iostream>
 #include <fstream>
-#include <cstdlib>
-#include <cmath>
 #include <cstring>
-#include <cassert>
-#include <fcntl.h>
-#include <map>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <sys/mman.h>
 #include <FBase.h>
 #include <Dmap.h>
 #include <runn.h>

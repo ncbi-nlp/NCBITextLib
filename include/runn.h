@@ -3,20 +3,6 @@
 
 #include <iostream>
 #include <fstream>
-#include <cstdlib>
-#include <sstream>
-#include <iomanip>
-#include <cmath>
-#include <cctype>
-#include <cstring>
-#include <cstdlib>
-#include <map>
-#include <unistd.h>
-#include <fcntl.h>
-#include <time.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <sys/mman.h>
 
 using namespace std;
 namespace iret {

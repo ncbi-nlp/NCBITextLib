@@ -2,6 +2,7 @@
 #define THEMS_H
 
 #include <iostream>
+#include <cmath>
 #include <Index.h>
 #include <XPost.h>
 #include "BayeX.h"

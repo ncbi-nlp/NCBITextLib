@@ -1,13 +1,9 @@
 #ifndef STRSET_H
 #define STRSET_H
 
-#include <iostream>
 #include <fstream>
-#include <cstring>
-#include <map>
 #include <FBase.h>
 #include <Dmap.h>
-#include <runn.h>
 
 #define MAP_F 1 // Stands for the Strset files .n, .a, and .s
 
