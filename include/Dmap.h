@@ -1,15 +1,13 @@
 #ifndef DMAP_H
 #define DMAP_H
 
-#include <fstream>
-#include <iostream>
-#include <runn.h>
+#include <map>
 
-using namespace std;
+using std::map;
 namespace iret {
 
 template<class Z>
-class Dmap : public std::map<const char *,Z,SCmp<const char *> > {
+class Dmap : public map<const char *,Z,SCmp<const char *> > {
    public:
       Dmap(void); 
      ~Dmap(void);

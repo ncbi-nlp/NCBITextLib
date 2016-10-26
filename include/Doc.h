@@ -1,7 +1,6 @@
 #ifndef DOC_H
 #define DOC_H
 
-#include <iostream>
 #include <fstream>
 #include <vector>
 #include <FBase.h>

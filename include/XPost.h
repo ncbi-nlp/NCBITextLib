@@ -1,7 +1,6 @@
 #ifndef XPOST_H
 #define XPOST_H
 
-#include <iostream>
 #include <fstream>
 #include <FBase.h>
 #include <Dmap.h>
@@ -9,7 +8,6 @@
 #include <Index.h>
 #include <Strset.h>
 #include <Hash.h>
-#include <runn.h>
 
 using namespace std;
 namespace iret {

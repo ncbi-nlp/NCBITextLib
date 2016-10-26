@@ -4,6 +4,7 @@
 #include <iostream>
 #include <fstream>
 #include <Index.h>
+#include <cmath>
 #include "CMark.h"
 
 namespace iret {
