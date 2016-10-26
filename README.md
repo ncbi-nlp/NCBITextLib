@@ -39,7 +39,7 @@ performance, merchantability or fitness for any particular purpose.
 
 2. Compiling example programs
   * cd ./applications
-  * make N=[file name], e.g. make N=make_db
+  * make [file name], e.g. make make_db
 
 3. Machine learing classes and examples
   * cd ./applications
