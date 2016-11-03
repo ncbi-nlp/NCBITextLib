@@ -1,7 +1,9 @@
 #ifndef DMAP_H
 #define DMAP_H
 
+#include <cstring>
 #include <map>
+#include "runn.h"
 
 using std::map;
 namespace iret {
@@ -52,7 +54,7 @@ void Dmap<Z>::add_count(const char *str,Z n) {
       q->second+=n;
    }
    else {
-      lxn=strlen(str);
+      lxn=std::strlen(str);
       pch=new char[lxn+1];
       strcpy(pch,str);
       this->insert(make_pair(pch,n));
