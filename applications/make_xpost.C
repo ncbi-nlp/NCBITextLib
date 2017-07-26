@@ -19,8 +19,8 @@ int main(int argc,char **argv)
 
   XP->create_Allz(*Dc); // XPost with local counts
   // Alternatively, can use XP->create_Allz(*Dc,d_local())
-  // This function also saves local weights
   // e.g. XP->create_Allz(*Dc,d_wilbur_med)
+  // This also saves local weights and is used for the find_neighbors program
   // Refer to Vnab.h for available local weight functions
 
   delete XP;

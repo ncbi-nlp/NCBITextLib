@@ -14,6 +14,7 @@ main(int argc,char **argv)
   float sx;
   Ordr<int,float> *pOrd;
 
+  // Must create XPost using create_Allz(*Dc,d_local())
   VnbX<int,float> *Cs=new VnbX<int,float>("SAMPLE","db");
   Cs->gopen_db_map();
   Cs->Load(i); // Loads data for ith document, i.e. for the seed document
