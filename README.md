@@ -46,10 +46,12 @@ performance, merchantability or fitness for any particular purpose.
   * BayeX.h: naive Bayes classifier (inherit from CMark)
   * HubeX.h: support vector machine classifier (inherit from CMark)
   * ThemX.h: theme analysis algorithm (inherit from BayeX)
-  * make_db: create a Doc and XPost from samples.txt
+  * make_doc: create a Doc from samples.txt
+  * make_xpost: create a XPost from a Doc set
   * run_BayeX: naive Bayes classifier example
   * run_HubeX: support vector machine classifier example
   * run_ThemX: theme analysis algorithm example
+  * find_neighbors: find neighboring documents from a seed document
 
 ## List of Contributors ##
 

@@ -2,7 +2,9 @@
 *.o
 *~
 
-applications/make_db
+applications/make_doc
+applications/make_xpost
 applications/run_BayeX
 applications/run_HubeX
 applications/run_ThemX
+applications/find_neighbors
