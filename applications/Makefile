@@ -10,6 +10,6 @@ TRASHFILES = $(LIBDIR)/*.o *~ *.bak core
 %.o: %.C
 	g++ -std=c++11 -c $(OS) -I$(INCPATH) $< -o $@
 
-all:  make_db run_ThemX run_HubeX run_BayeX
+all:  make_doc make_xpost run_ThemX run_HubeX run_BayeX find_neighbors
 
 clean: rm -f $(TRASHFILES)
