@@ -12,6 +12,8 @@
 using namespace std;
 namespace iret {
 
+extern double xttrc;
+
 class STerm : public FBase {
    public:
       STerm(const char *typ,const char *nam,const char *pnam);
@@ -42,12 +44,19 @@ class XPost : public FBase {
       // Simply call create_Allz() after initializing Doc and XPost
       void create_Allz(Doc<Z> &SDc);
          // Creates all files for XPost, postings and local Z values 
+      void create_Allz(Doc<Z> &SDc,float (*d_local)(int,long));
+         // Creates all files for XPost, postings and local Z values
+         // Include local weights (refer to Vnab for available local weights)
 
       void create_Terms(Doc<Z> &SDc); // Create term structures
          // Reads SDc and creates all the term structures
+
       void create_DBinz(Doc<Z> &SDc); // Creates binary document representation
          // Creates local Z values in .x file
-         // Also creates a .z file with ndoc, max set size and nwrd 
+         // Also creates a .z file with ndoc, max set size and nwrd
+      void create_DBinz(Doc<Z> &SDc,float (*d_local)(int,long)); 
+         // Creates binary doc rep as previous, but also local weights
+  
       void create_Postz(void); // Creates posting files for Z values 
          // Also creates a .z file with nwrd, nslcs and ndoc in it
 
@@ -120,7 +129,6 @@ class XPost : public FBase {
       Z *dw;       // Maps local Z values for all docs
 
       Y *freq;     // Maps the frequency of terms
-      Z *sgw;      // Maps square root of global weights
       long *addr;  // Maps the addresses for postings 
       Y *post;     // Maps the postings file
       Z *wc;       // Maps the local weights
@@ -144,6 +152,13 @@ template<class Y,class Z>
 void XPost<Y,Z>::create_Allz(Doc<Z> &SDc) {
    create_Terms(SDc);
    create_DBinz(SDc);
+   create_Postz();
+}
+
+template<class Y,class Z>
+void XPost<Y,Z>::create_Allz(Doc<Z> &SDc,float (*d_local)(int,long)) {
+   create_Terms(SDc);
+   create_DBinz(SDc,d_local);
    create_Postz();
 }
 
@@ -225,6 +240,51 @@ void XPost<Y,Z>::create_DBinz(Doc<Z> &SDc) {
       }
       SDc.clear();
       mark(pflag,i,10000,"docs");
+   }
+   dst_Ostr(pfw);
+   dst_Ostr(pfa);
+   dst_Ostr(pfs);
+   dst_Ostr(pfx);
+}
+
+template<class Y,class Z>
+void XPost<Y,Z>::create_DBinz(Doc<Z> &SDc,float (*d_local)(int,long)) {
+   long sm=0,i,j,m,n1,n2;
+   long *sn,*ss,sp,*px=NULL,*adr;
+   Y k;
+   Z u,sum;
+   const char *pch;
+
+   SDc.gopen_map();
+   ndoc=(Y)SDc.ndoc;
+   get_Nnum("z",i,j);
+   nwrd=(Y)i;
+   gopen_hash();
+   ofstream *pfw=get_Ostr("wd",ios::out);
+   ofstream *pfa=get_Ostr("ad",ios::out);
+   ofstream *pfs=get_Ostr("sd",ios::out);
+   ofstream *pfx=get_Ostr("xd",ios::out);
+
+   for(i=0;i<SDc.ndoc;i++) {
+      pfa->write((char*)&sm,sizeof(long));
+      SDc.read(i);
+      sum=0;
+      while(pch=SDc.show(u)) {
+         if(!strstr(pch," ")) sum+=u;
+      }
+      n1=rnd(sum);
+      k=(Y)SDc.nw;
+      sm+=k;
+      pfs->write((char*)&k,sizeof(Y));
+      SDc.reset();
+      while(pch=SDc.show(u)) {
+         k=(Y)pCh->count(pch)-1;
+         u=(Z)d_local((int)rnd(u),n1);
+         pfw->write((char*)&k,sizeof(Y));
+         pfx->write((char*)&u,sizeof(Z));
+      }
+      SDc.clear();
+      mark(i,10000,"docs");
    }
    dst_Ostr(pfw);
    dst_Ostr(pfa);

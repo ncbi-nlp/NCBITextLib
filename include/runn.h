@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <fstream>
+#include <cmath>
 
 using namespace std;
 namespace iret {
@@ -19,6 +20,8 @@ int mark(int pflag,long ct,int ivl,const char *what);
    // how a function is progressing. It is dependent on the value of pflag
 int mark(long ct,int ivl,const char *what);
    // Same as above but not dependent on pflag
+long rnd(double p);
+   // This function rounds off a double and returns the integer that results
 
 // Reads in a string including white space and
 // ends the string just before the character a

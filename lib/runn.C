@@ -30,4 +30,8 @@ int mark(long ct,int ivl,const char *what) {
    else return(0);
 }
 
+long rnd(double p) {
+   return((long)floor(p+.5));
+}
+
 }
