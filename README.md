@@ -33,25 +33,30 @@ performance, merchantability or fitness for any particular purpose.
 
 ## How to Use ##
 
-1. Building a library
+1. Download
+  * git clone https://github.com/ncbi-nlp/NCBITextLib.git
+
+2. Building a library
   * cd ./lib
   * make
 
-2. Compiling example programs
+3. Compiling example programs
   * cd ./applications
   * make [file name], e.g. make make_db
 
-3. Machine learing classes and examples
+4. Machine learing classes and examples
   * cd ./applications
   * BayeX.h: naive Bayes classifier (inherit from CMark)
   * HubeX.h: support vector machine classifier (inherit from CMark)
   * ThemX.h: theme analysis algorithm (inherit from BayeX)
   * make_doc: create a Doc from samples.txt
-  * make_xpost: create a XPost from a Doc set
+  * make_xpost: create a XPost from a Doc set (should run make_doc and make_xpost beforhand for other applications)
   * run_BayeX: naive Bayes classifier example
   * run_HubeX: support vector machine classifier example
   * run_ThemX: theme analysis algorithm example
   * find_neighbors: find neighboring documents from a seed document
+
+NOTE: sample programs use XPost, thus should run make_doc and make_xpost beforehand.
 
 ## List of Contributors ##
 
