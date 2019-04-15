@@ -8,4 +8,5 @@ libText.a: FBase.o XPost.o Vnab.o Strset.o Hash.o runn.o
 %.o: $(SRC_DIR)/%.C
 	g++ -std=c++11 -c -gdwarf-2 $< -o $@ $(LIB_INC)
 
-clean: rm -f $(TRASHFILES)
+clean: 
+	rm -f $(TRASHFILES)
