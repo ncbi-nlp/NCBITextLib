@@ -203,7 +203,7 @@ void hRort(const long n,X *ra,Y *rb) {
 template<class T>
 class SCmp : binary_function<T,T,bool> {
 public:
-   bool operator() (T s,T t){
+   bool operator() (T s,T t) const {
       int i = strcmp(s,t);
       if(i<0)return true;
       else return false;
