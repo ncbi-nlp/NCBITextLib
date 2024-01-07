@@ -1,5 +1,9 @@
 #include <FBase.h>
 
+#ifndef MAP_NORESERVE
+#define MAP_NORESERVE 0
+#endif
+
 using namespace std;
 namespace iret {
 
